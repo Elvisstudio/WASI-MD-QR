@@ -6,7 +6,7 @@ const fs = require('fs');
 let router = express.Router()
 const pino = require("pino");
 const {
-    default: Wasi_Tech,    useMultiFileAuthState,
+    default: Elvis_Tech,    useMultiFileAuthState,
     delay,
     makeCacheableSignalKeyStore,
     Browsers
@@ -19,13 +19,13 @@ function removeFile(FilePath){
 router.get('/', async (req, res) => {
     const id = makeid();
     let num = req.query.number;
-        async function WASI_MD_PAIR_CODE() {
+        async function ANOS_V1_PAIR_CODE() {
         const {
             state,
             saveCreds
         } = await useMultiFileAuthState('./temp/'+id)
      try {
-            let Pair_Code_By_Wasi_Tech = Wasi_Tech({
+            let Pair_Code_By_Elvis_Tech = Wasi_Tech({
                 auth: {
                     creds: state.creds,
                     keys: makeCacheableSignalKeyStore(state.keys, pino({level: "fatal"}).child({level: "fatal"})),
@@ -34,16 +34,16 @@ router.get('/', async (req, res) => {
                 logger: pino({level: "fatal"}).child({level: "fatal"}),
                 browser: ["Chrome (Linux)", "", ""]
              });
-             if(!Pair_Code_By_Wasi_Tech.authState.creds.registered) {
+             if(!Pair_Code_By_Elvis_Tech.authState.creds.registered) {
                 await delay(1500);
                         num = num.replace(/[^0-9]/g,'');
-                            const code = await Pair_Code_By_Wasi_Tech.requestPairingCode(num)
+                            const code = await Pair_Code_By_Elvis_Tech.requestPairingCode(num)
                  if(!res.headersSent){
                  await res.send({code});
                      }
                  }
-            Pair_Code_By_Wasi_Tech.ev.on('creds.update', saveCreds)
-            Pair_Code_By_Wasi_Tech.ev.on("connection.update", async (s) => {
+            Pair_Code_By_Elvis_Tech.ev.on('creds.update', saveCreds)
+            Pair_Code_By_Elvis_Tech.ev.on("connection.update", async (s) => {
                 const {
                     connection,
                     lastDisconnect
@@ -53,33 +53,33 @@ router.get('/', async (req, res) => {
                 let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
                 await delay(800);
                let b64data = Buffer.from(data).toString('base64');
-               let session = await Pair_Code_By_Wasi_Tech.sendMessage(Pair_Code_By_Wasi_Tech.user.id, { text: '' + b64data });
+               let session = await Pair_Code_By_Elvis_Tech.sendMessage(Pair_Code_By_Wasi_Tech.user.id, { text: '' + b64data });
 
-               let WASI_MD_TEXT = `
-*_Pair Code Connected by WASI TECH_*
+               let ANOS_V1_TEXT = `
+*_Pair Code Connected by Elvis TECH_*
 *_Made With 🤍_*
 ______________________________________
 ╔════◇
-║ *『𝗪𝗢𝗪 𝗔𝗠𝗔𝗭𝗜𝗡𝗚 𝗖𝗛𝗢SEN 𝗪𝗔𝗦𝗜 𝗠𝗗』*
+║ *『𝗪𝗢𝗪 𝗔𝗠𝗔𝗭𝗜𝗡𝗚 𝗖𝗛𝗢SEN ANOS V1』*
 ║ _You Have Completed the First Step to Deploy a Whatsapp Bot._
 ╚════════════════════════╝
 ╔═════◇
 ║  『••• 𝗩𝗶𝘀𝗶𝘁 𝗙𝗼𝗿 𝗛𝗲𝗹𝗽 •••』
-║❒ *Ytube:* _youtube.com/@wasitech1
-║❒ *Owner:* _https://wa.me/message/THZ3I25BYZM2E1_
-║❒ *Repo:* _https://github.com/wasixd/WASI-MD_
-║❒ *WaGroup:* _https://chat.whatsapp.com/FF6YuOZTAVB6Lu65cnY5BN_
-║❒ *WaChannel:* _https://whatsapp.com/channel/0029VaDK8ZUDjiOhwFS1cP2j_
-║❒ *Plugins:* _https://github.com/Itxxwasi 
+║❒ *Ytube:* _youtube.com
+║❒ *Owner:* _https://wa.me/message/2348148472374_
+║❒ *Repo:* _https://github.com/Elvisstudio_
+║❒ *WaGroup:* _https://whatsapp.com/channel/0029Vb5qpfsGehERlVGvtU2M_
+║❒ *WaChannel:* _https://whatsapp.com/channel/0029Vb5qpfsGehERlVGvtU2M_
+║❒ *Plugins:* _https://github.com/Elvisstudio 
 ╚════════════════════════╝
 _____________________________________
 
 _Don't Forget To Give Star To My Repo_`
- await Pair_Code_By_Wasi_Tech.sendMessage(Pair_Code_By_Wasi_Tech.user.id,{text:WASI_MD_TEXT},{quoted:session})
+ await Pair_Code_By_Elvis_Tech.sendMessage(Pair_Code_By_Wasi_Tech.user.id,{text:ANOS_V1_TEXT},{quoted:session})
  
 
         await delay(100);
-        await Pair_Code_By_Wasi_Tech.ws.close();
+        await Pair_Code_By_Elvis_Tech.ws.close();
         return await removeFile('./temp/'+id);
             } else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
                     await delay(10000);
@@ -94,6 +94,6 @@ _Don't Forget To Give Star To My Repo_`
          }
         }
     }
-    return await WASI_MD_PAIR_CODE()
+    return await ANOS_V1_PAIR_CODE()
 });
 module.exports = router
